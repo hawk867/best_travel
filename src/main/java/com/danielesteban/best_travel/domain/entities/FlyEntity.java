@@ -2,11 +2,17 @@ package com.danielesteban.best_travel.domain.entities;
 
 import com.danielesteban.best_travel.util.AeroLine;
 import jakarta.persistence.*;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 
 import java.io.Serializable;
 import java.math.BigDecimal;
 
 @Entity(name = "fly")
+@NoArgsConstructor @AllArgsConstructor
+@Data @Builder
 public class FlyEntity implements Serializable {
 
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
