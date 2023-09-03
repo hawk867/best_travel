@@ -6,6 +6,7 @@ import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
+import java.math.BigDecimal;
 import java.util.UUID;
 
 @SpringBootApplication
@@ -48,5 +49,10 @@ public class BestTravelApplication implements CommandLineRunner {
         log.info(String.valueOf(ticket));
         log.info(String.valueOf(reservation));
         log.info(String.valueOf(customer));
+
+        this.flyRepository.selectLessPrice(BigDecimal.valueOf(20)).forEach(System.out::println);
+
+        var flyByTicket = flyRepository.findByTicketId(UUID.fromString("12345678-1234-5678-2236-567812345678"));
+        System.out.println(flyByTicket);
     }
 }
