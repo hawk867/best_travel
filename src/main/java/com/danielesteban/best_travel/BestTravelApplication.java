@@ -97,6 +97,11 @@ public class BestTravelApplication implements CommandLineRunner {
                 .build();
 
         System.out.println("--- SAVING ---");
-        tourRepository.save(tour12);
+        tour12.addReservation(reservation12);
+        tour12.updateReservations();
+        tour12.addTicket(ticket12);
+        tour12.updateTickets();
+
+        this.tourRepository.save(tour12);
     }
 }
