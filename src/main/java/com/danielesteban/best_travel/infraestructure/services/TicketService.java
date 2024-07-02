@@ -39,7 +39,7 @@ public class TicketService implements ITicketService {
                 .id(UUID.randomUUID())
                 .fly(fly)
                 .customer(customer)
-                .price(fly.getPrice().multiply(charger_price_percentage))
+                .price(fly.getPrice().add(fly.getPrice().multiply(charger_price_percentage)))
                 .purchaseDate(LocalDate.now())
                 .arrivalDate(LocalDateTime.now())
                 .departureDate(LocalDateTime.now())
@@ -62,7 +62,7 @@ public class TicketService implements ITicketService {
         var fly = flyRepository.findById(request.getIdFly()).orElseThrow();
 
         ticketToUpdate.setFly(fly);
-        ticketToUpdate.setPrice(fly.getPrice().multiply(charger_price_percentage));
+        ticketToUpdate.setPrice(fly.getPrice().add(fly.getPrice().multiply(charger_price_percentage)));
         ticketToUpdate.setDepartureDate(LocalDateTime.now());
         ticketToUpdate.setArrivalDate(LocalDateTime.now());
         var ticketPersisted = this.ticketRepository.save(ticketToUpdate);
@@ -80,7 +80,7 @@ public class TicketService implements ITicketService {
     @Override
     public BigDecimal findPrice(Long flyId) {
         var fly = this.flyRepository.findById(flyId).orElseThrow();
-        return fly.getPrice().multiply(charger_price_percentage);
+        return fly.getPrice().add(fly.getPrice().multiply(charger_price_percentage));
     }
 
     private TicketResponse entityToResponse(TicketEntity ticketEntity) {
